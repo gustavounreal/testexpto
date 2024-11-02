@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+{% load custom_filters %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/minhasVendas.css' %}">
+<div class="container-master">
+    <header><p><br></p><p><br></p><p><br></p>
+        <h1>Detalhes das suas Vendas</h1>
+        <p>Visualize e acompanhe todas as informações das suas vendas e seu status de pagamento</p>
+    </header>
+    <main>
+        <section class="resumo-venda">
+            <div class="comissao-atual card">
+                <h2><i class="fas fa-dollar-sign"></i> Saldo Atual de Comissão</h2>
+                <p class="valor verde">{{ total_boletos_pagos|currency }}</p>
+            </div>
+            <div class="status-venda card">
+                <h2><i class="fas fa-info-circle"></i> Status</h2>
+                <span class="selo status-ativa">Ativa</span>
+            </div>
+            <div class="valor-total card">
+                <h2><i class="fas fa-chart-line"></i> Valor Total de Vendas Provisionadas</h2>
+                <p class="valor">{{ valor_total_venda|currency }}</p>
+            </div>
+            <div class="comissao-venda card">
+                <h2><i class="fas fa-percentage"></i> Comissão Provisionada</h2>
+                <p class="valor">{{ comissao|currency }}</p>
+            </div>
+            <div class="quantidade-vendas card">
+                <h2><i class="fas fa-shopping-cart"></i> Quantidade de Vendas</h2>
+                <p class="valor">{{ quantidade_vendas }}</p>
+            </div>
+        </section>
+        <section class="detalhes-venda">
+            <h2>Detalhes das Vendas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Status</th>
+                        <th>Descrição</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in vendas %}
+                    <tr>
+                        <td>{{ venda.data_venda }}</td>
+                        <td>{{ venda.valor_venda|currency }}</td>
+                        <td>{{ venda.status }}</td>
+                        <td>{{ venda.descricao_venda }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="controle-pagamento">
+            <h2>Controle de Pagamento</h2>
+            <div class="resumo-parcelas">
+                <p>Total de Boletos: {{ total_boletos }}</p>
+                <p>Boletos Pagos: {{ boletos_pagos }}</p>
+                <p>Boletos Pendentes: {{ boletos_pendentes }}</p>
+                <p>Total Recebido: {{ total_boletos_pagos|currency }}</p>
+                <p>Total a Receber: {{ total_boletos_pendentes|currency }}</p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>N° Boleto</th>
+                        <th>Valor</th>
+                        <th>Vencimento</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for boleto in boletos %}
+                    <tr class="venda-{{ boleto.venda.id }}">
+                        <td>{{ boleto.numero_boleto }}</td>
+                        <td>{{ boleto.valor|currency }}</td>
+                        <td>{{ boleto.data_vencimento }}</td>
+                        <td><span class="selo status-{{ boleto.status_pagamento }}">{{ boleto.status_pagamento|capfirst }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+        <section class="historico-pagamentos">
+            <h2>Histórico de Pagamentos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Data de Vencimento</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for boleto in historico_pagamentos %}
+                    <tr class="venda-{{ boleto.venda.id }}">
+                        <td>{{ boleto.data_vencimento }}</td>
+                        <td>{{ boleto.valor|currency }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+    <div class="notificacoes">
+        <!-- Notificações em tempo real -->
+    </div>
+</div><p><br></p>
+{% endblock %}

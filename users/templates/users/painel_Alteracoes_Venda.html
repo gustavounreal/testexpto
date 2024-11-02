@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/painel_alteracoes_Venda.css' %}">
+<div class="container-master">
+    <header>
+        <h1>Alterar Status de Boletos</h1>
+        <p>Digite o CPF do cliente para buscar os boletos e alterar o status.</p>
+    </header>
+    <main>
+        <section class="busca-cpf">
+            <form method="GET" action="{% url 'buscar_boletos' %}">
+                <input type="text" name="cpf" id="cpf" placeholder="Digite o CPF do cliente">
+                <button type="submit">Buscar Boletos</button>
+            </form>
+        </section>
+        {% if cliente %}
+        <section class="info-cliente">
+            <h2>Informações do Cliente</h2>
+            <p><strong>Nome:</strong> {{ cliente.nome_completo }}</p>
+            <p><strong>CPF:</strong> {{ cliente.cpf }}</p>
+            <p><strong>Valor da Venda:</strong> R$ {{ cliente.valor_venda }}</p>
+        </section>
+        {% endif %}
+        <section id="lista-boletos">
+            {% if boletos %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data de Vencimento</th>
+                            <th>Status</th>
+                            <th>Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for boleto in boletos %}
+                        <tr class="{% if boleto.status == 'pago' %}pago{% else %}pendente{% endif %}">
+                            <td>{{ boleto.id }}</td>
+                            <td>{{ boleto.data_vencimento }}</td>
+                            <td>{{ boleto.status }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'alterar_status_boleto' boleto.id %}">
+                                    {% csrf_token %}
+                                    <select name="status">
+                                        <option value="pago" {% if boleto.status == 'pago' %}selected{% endif %}>Pago</option>
+                                        <option value="pendente" {% if boleto.status == 'pendente' %}selected{% endif %}>Pendente</option>
+                                    </select>
+                                    <button type="submit">Alterar</button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p>Nenhum boleto encontrado.</p>
+            {% endif %}
+        </section>
+    </main>
+</div>
+{% endblock %}

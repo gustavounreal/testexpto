@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+
+    <header class="welcome-header">
+        {% if request.user.dadosusuario.nome_completo %}
+            <h2>Bem-vindo, {{ request.user.dadosusuario.nome_completo }}</h2>
+        {% else %}
+            <h2>Bem-vindo, {{ request.user.username }}</h2>
+        {% endif %}
+        <p>ID do Funcionário: {{ request.user.id }}</p>
+    </header>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h3>Informações Pessoais</h3>
+            <p>Nome: {{ request.user.dadosusuario.nome_completo }}</p>
+            <p>Email: {{ request.user.email }}</p>
+            <p>Telefone: {{ request.user.dadosusuario.telefone }}</p>
+        </div>
+        <div class="card">
+            <h3>Atividades Recentes</h3>
+            <ul>
+                <li>Atividade 1</li>
+                <li>Atividade 2</li>
+                <li>Atividade 3</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h3>Estatísticas</h3>
+            <p>Projetos Concluídos: 10</p>
+            <p>Tarefas Pendentes: 5</p>
+        </div>
+    </div>
+{% endblock %}

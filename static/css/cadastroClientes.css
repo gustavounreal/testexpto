@@ -1,0 +1,140 @@
+/* cadastroClientes.css */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto; /* Margem padrão */
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+    .container {
+        margin: 70px 20px; /* Margem menor para dispositivos móveis */
+        padding: 15px; /* Padding menor para dispositivos móveis */
+    }
+}
+
+/* Estilos para desktops */
+@media (min-width: 769px) {
+    .container {
+        margin: 100px auto; /* Margem maior para desktops */
+        padding: 20px; /* Padding padrão para desktops */
+    }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+header p {
+    font-size: 16px;
+    color: #666;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+section h2 {
+    font-size: 20px;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.form-group .pix-info,
+.form-group .boleto-info {
+    display: none;
+}
+
+.form-actions {
+    text-align: center;
+}
+
+.form-actions .btn-primary,
+.form-actions .btn-secondary {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+}
+
+.form-actions .btn-primary {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.form-actions .btn-primary:hover {
+    background-color: #218838;
+}
+
+.form-actions .btn-secondary {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.form-actions .btn-secondary:hover {
+    background-color: #c82333;
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-error {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}

@@ -1,0 +1,130 @@
+/* cadastro.css */
+body {
+    margin: 0;
+    font-family: 'Roboto', Arial, sans-serif;
+    background: linear-gradient(135deg, #0033dc, #ff7700);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.paper {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.logo {
+    width: 150px; /* Ajuste o tamanho conforme necessário */
+    margin-bottom: 10px; /* Espaçamento entre a logo e o título */
+}
+
+h2 {
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 300;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-container {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.icon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+input[type="text"], input[type="password"], input[type="email"] {
+    padding: 10px 10px 10px 40px; /* Espaço para o ícone */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+    border-color: #406dff;
+    outline: none;
+}
+
+.register-button {
+    padding: 10px;
+    background-color: #406dff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+    margin-top: 10px;
+}
+
+.register-button:hover {
+    transform: scale(1.05);
+    background-color: #3050cc;
+}
+
+.login-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login-links a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.login-links a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .paper {
+        padding: 20px;
+    }
+
+    input[type="text"], input[type="password"], input[type="email"] {
+        padding: 15px 15px 15px 40px;
+    }
+
+    .register-button {
+        padding: 15px;
+    }
+}

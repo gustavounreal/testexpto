@@ -1,0 +1,168 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container-master {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px; /* Largura máxima para desktops */
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    background-color: #ffffff;
+    color: #333;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+header p {
+    margin: 5px 0 0;
+}
+
+main {
+    padding: 20px;
+}
+
+.resumo-venda {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.card {
+    flex: 1 1 calc(33.333% - 20px); /* Ajuste para 3 cartões por linha */
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.card h2 {
+    margin: 0 0 10px;
+    font-size: 1.2em;
+}
+
+.card .valor {
+    font-size: 2em;
+    color: #333333;
+}
+
+.card .valor.verde {
+    color: #28a745;
+}
+
+.status-venda .selo {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.status-ativa {
+    background-color: #28a745;
+}
+
+.status-finalizada {
+    background-color: #6c757d;
+}
+
+.status-cancelada {
+    background-color: #dc3545;
+}
+
+.cartao {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #f8f9fa;
+}
+
+.selo {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+.status-pago {
+    background-color: #28a745;
+}
+
+.status-pendente {
+    background-color: #ffc107;
+}
+
+.status-atrasado {
+    background-color: #dc3545;
+}
+
+.linha-do-tempo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.linha-do-tempo .evento {
+    text-align: center;
+}
+
+.notificacoes {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 20px;
+}
+
+.venda-1 {
+    background-color: #f8d7da;
+}
+
+.venda-2 {
+    background-color: #d4edda;
+}
+
+.venda-3 {
+    background-color: #d1ecf1;
+}
+
+/* Adicione mais classes conforme necessário */
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-master {
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .card {
+        flex: 1 1 100%;
+    }
+}

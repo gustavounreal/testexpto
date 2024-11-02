@@ -1,0 +1,165 @@
+/* bars.css */
+
+/* Topbar */
+.top-bar {
+    display: none; /* Esconde a barra superior por padrão */
+    width: 100%;
+    height: 70px; /* Ajuste a altura conforme necessário */
+    background-color: #ffffff; /* Cor branca */
+    position: fixed;
+    top: 0;
+    left: 200px; /* Espaço para a sidebar */
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0; /* Padding interno no topo e na parte inferior */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona sombra */
+    border-bottom-left-radius: 5px; /* Bordas redondas na parte inferior esquerda */
+    border-bottom-right-radius: 5px; /* Bordas redondas na parte inferior direita */
+    transition: opacity 0.5s ease; /* Transição para o efeito de fade */
+}
+
+.top-bar.hidden {
+    opacity: 0; /* Torna a barra invisível */
+}
+
+.top-bar .logo {
+    max-height: 40px; /* Ajuste o tamanho conforme necessário */
+}
+
+/* Navbar */
+.navbar {
+    display: none; /* Esconde a navbar por padrão */
+    width: 100%;
+    background-color: #1732d3;
+    color: #ffffff;
+    padding: 10px;
+    position: fixed;
+    bottom: 0; /* Posiciona a navbar na parte inferior */
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Adiciona sombra à navbar */
+    border-top-left-radius: 15px; /* Bordas redondas na parte superior esquerda */
+    border-top-right-radius: 15px; /* Bordas redondas na parte superior direita */
+}
+
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-around; /* Distribui os itens igualmente */
+    margin: 0;
+    width: 100%; /* Garante que a largura seja 100% */
+}
+
+.navbar ul li {
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Garante que cada item ocupe o mesmo espaço */
+    text-align: center; /* Centraliza o conteúdo de cada item */
+}
+
+.navbar ul li a {
+    display: flex;
+    flex-direction: column; /* Coloca o ícone e o texto em coluna */
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    padding: 10px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    font-size: 18px;
+}
+
+.navbar ul li a i {
+    font-size: 24px;
+}
+
+.navbar ul li a span {
+    font-size: 12px; /* Tamanho pequeno para a descrição */
+    margin-top: 5px; /* Espaço entre o ícone e a descrição */
+}
+
+.navbar ul li a:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 160px; /* Ajuste a largura conforme necessário */
+    background-color: #1732d3;
+    color: #fff;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow-y: auto;
+    box-shadow: 5px 0 7px rgba(0, 0, 0, 0.1); /* Adiciona sombra à sidebar */
+    background-image: url("{% static 'imagens/LogoMR_BARUCH.png' %}");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 20px 0;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza os itens horizontalmente */
+    padding: 15px 20px;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+}
+
+.sidebar ul li a i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ef4c26;
+    padding-left: 30px; /* Adiciona um efeito de deslocamento ao passar o mouse */
+}
+
+.sidebar ul li a.active {
+    background-color: #ef4c26;
+    border-radius: 5px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        display: none; /* Esconde a sidebar em dispositivos móveis */
+    }
+    .navbar {
+        display: flex; /* Mostra a navbar em dispositivos móveis */
+    }
+    .top-bar {
+        display: none; /* Esconde a topbar em dispositivos móveis */
+    }
+}
+
+@media (min-width: 769px) {
+    .top-bar {
+        display: flex; /* Mostra a barra superior em desktops */
+    }
+    .navbar {
+        display: none; /* Esconde a navbar em desktops */
+    }
+    .sidebar {
+        display: block; /* Mostra a sidebar em desktops */
+    }
+}

@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Perfil do Usuário{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="container">
+    <div class="main-container"><p><br></p>
+        {% if dados_usuario.nome_completo %}
+            <h2 class="welcome-message">Bem-vindo(a) ao seu Perfil, {{ dados_usuario.nome_completo }}</h2>
+        {% else %}
+            <h2 class="welcome-message">Bem-vindo(a) ao seu Perfil, {{ user.username }}</h2>
+        {% endif %}<p><br></p>
+        <div class="dashboard-container">
+            <!-- Container 1: Dados do Perfil (Visualização) -->
+            <div id="view-container" class="card">
+                <h3>Dados do Perfil</h3>
+                <div class="user-info">
+                    <p><i class="fas fa-id-badge"></i> <span class="semi-strong">ID:</span> <span class="data-value">{{ user.id }}</span></p>
+                    <p><i class="fas fa-user"></i> <span class="semi-strong">Nome Completo:</span> <span class="data-value">{{ dados_usuario.nome_completo }}</span></p>
+                    <p><i class="fas fa-id-card"></i> <span class="semi-strong">CPF:</span> <span class="data-value">{{ dados_usuario.cpf }}</span></p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span class="semi-strong">Endereço:</span> <span class="data-value">{{ dados_usuario.endereco }}</span></p>
+                    <p><i class="fas fa-map-pin"></i> <span class="semi-strong">CEP:</span> <span class="data-value">{{ dados_usuario.cep }}</span></p>
+                    <p><i class="fas fa-envelope"></i> <span class="semi-strong">Email:</span> <span class="data-value">{{ dados_usuario.email }}</span></p>
+                    <p><i class="fas fa-phone"></i> <span class="semi-strong">WhatsApp:</span> <span class="data-value">{{ dados_usuario.whatsapp }}</span></p>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="btn-primary" onclick="showEditContainer()">Atualizar Dados</button>
+                </div>
+            </div>
+
+            <!-- Container 2: Dados Bancários (Visualização) -->
+            <div id="view-container-bancarios" class="card">
+                <h3>Dados Bancários</h3>
+                <div class="user-info">
+                    <p><i class="fas fa-university"></i> <span class="semi-strong">Banco:</span> <span class="data-value">{{ dados_usuario.banco }}</span></p>
+                    <p><i class="fas fa-building"></i> <span class="semi-strong">Agência:</span> <span class="data-value">{{ dados_usuario.agencia }}</span></p>
+                    <p><i class="fas fa-credit-card"></i> <span class="semi-strong">Conta:</span> <span class="data-value">{{ dados_usuario.conta }}</span></p>
+                    <p><i class="fas fa-key"></i> <span class="semi-strong">Pix:</span> <span class="data-value">{{ dados_usuario.pix }}</span></p>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="btn-primary" onclick="showEditContainer()">Atualizar Dados</button>
+                </div>
+            </div>
+
+            <!-- Container 3: Atividades Recentes -->
+            <div id="view-container-atividades" class="card">
+                <h3>Atividades Recentes</h3>
+                <div class="user-info">
+                    <p><i class="fas fa-clock"></i> <span class="semi-strong">Último Login:</span> <span class="data-value">{{ user.last_login }}</span></p>
+                    <p><i class="fas fa-edit"></i> <span class="semi-strong">Última Atualização de Perfil:</span> <span class="data-value">{{ dados_usuario.updated_at }}</span></p>
+                </div>
+            </div>
+
+            <!-- Container 4: Notificações -->
+            <div id="view-container-notificacoes" class="card">
+                <h3>Notificações</h3>
+                <div class="user-info">
+                    <p><i class="fas fa-bell"></i> <span class="semi-strong">Notificação 1:</span> <span class="data-value">Mensagem de exemplo</span></p>
+                    <p><i class="fas fa-bell"></i> <span class="semi-strong">Notificação 2:</span> <span class="data-value">Mensagem de exemplo</span>
+                </div>
+            </div>
+        </p><p><br></p><p><br></p><p><br></p><p><br></p>
+        </div>
+
+        <!-- Formulário para atualizar os dados do usuário (Edição) -->
+        <div id="edit-container" class="card" style="display: none;">
+            <h3>Dados do Perfil</h3>
+            <form method="post" action="{% url 'home' %}">
+                {% csrf_token %}
+                <div class="user-info">
+                    <p><i class="fas fa-id-badge"></i> <span class="semi-strong">ID:</span></p>
+                    <input type="text" id="id-input" name="id" value="{{ user.id }}" readonly>
+                    
+                    <p><i class="fas fa-user"></i> <span class="semi-strong">Nome Completo:</span></p>
+                    <input type="text" id="nome-completo-input" name="nome_completo" value="{{ dados_usuario.nome_completo }}">
+                    
+                    <p><i class="fas fa-id-card"></i> <span class="semi-strong">CPF:</span></p>
+                    <input type="text" id="cpf-input" name="cpf" value="{{ dados_usuario.cpf }}" maxlength="14">
+                    
+                    <p><i class="fas fa-map-marker-alt"></i> <span class="semi-strong">Endereço:</span></p>
+                    <input type="text" id="endereco-input" name="endereco" value="{{ dados_usuario.endereco }}">
+                    
+                    <p><i class="fas fa-map-pin"></i> <span class="semi-strong">CEP:</span></p>
+                    <input type="text" id="cep-input" name="cep" value="{{ dados_usuario.cep }}" maxlength="9">
+                    
+                    <p><i class="fas fa-envelope"></i> <span class="semi-strong">Email:</span></p>
+                    <input type="text" id="email-input" name="email" value="{{ dados_usuario.email }}">
+                    
+                    <p><i class="fas fa-phone"></i> <span class="semi-strong">WhatsApp:</span></p>
+                    <input type="text" id="whatsapp-input" name="whatsapp" value="{{ dados_usuario.whatsapp }}" maxlength="15">
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+
+                <h3>Dados Bancários</h3>
+                <div class="user-info">
+                    <p><i class="fas fa-university"></i> <span class="semi-strong">Banco:</span></p>
+                    <input type="text" id="banco-input" name="banco" value="{{ dados_usuario.banco }}">
+                    
+                    <p><i class="fas fa-building"></i> <span class="semi-strong">Agência:</span></p>
+                    <input type="text" id="agencia-input" name="agencia" value="{{ dados_usuario.agencia }}">
+                    
+                    <p><i class="fas fa-credit-card"></i> <span class="semi-strong">Conta:</p>
+                    <input type="text" id="conta-input" name="conta" value="{{ dados_usuario.conta }}">
+                    
+                    <p><i class="fas fa-key"></i> <span class="semi-strong">Pix:</span></p>
+                    <input type="text" id="pix-input" name="pix" value="{{ dados_usuario.pix }}">
+                </div>
+                <div class="button-container">
+                    <button type="submit" class="btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showEditContainer() {
+        document.getElementById('view-container').style.display = 'none';
+        document.getElementById('view-container-bancarios').style.display = 'none';
+        document.getElementById('view-container-atividades').style.display = 'none';
+        document.getElementById('view-container-notificacoes').style.display = 'none';
+        document.getElementById('edit-container').style.display = 'block';
+    }
+
+    document.getElementById('cpf-input').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d)/, '$1.$2');
+        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        e.target.value = value;
+    });
+
+    document.getElementById('cep-input').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        value = value.replace(/(\d{5})(\d)/, '$1-$2');
+        e.target.value = value;
+    });
+
+    document.getElementById('email-input').addEventListener('input', function (e) {
+        e.target.value = e.target.value.toLowerCase();
+    });
+
+    document.getElementById('whatsapp-input').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        value = value.replace(/(\d{2})(\d)/, '($1) $2');
+        value = value.replace(/(\d{4,5})(\d{4})$/, '$1-$2');
+        e.target.value = value;
+    });
+</script>
+{% endblock %}

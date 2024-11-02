@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-box">
+            <img src="{% static 'imagens/LogoMR_BARUCH.svg' %}" alt="Logo" class="logo">
+            <h2>Crie sua Conta</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="input-container">
+                    <i class="fas fa-user icon"></i>
+                    <input type="text" name="username" placeholder="Nome de Usuário" required>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-envelope icon"></i>
+                    <input type="email" name="email" placeholder="Email" required>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" name="password" placeholder="Senha" required>
+                </div>
+                <div class="input-container">
+                    <i class="fas fa-lock icon"></i>
+                    <input type="password" name="re_password" placeholder="Confirme a Senha" required>
+                </div>
+                <button type="submit" class="register-button">CADASTRAR</button>
+            </form>
+            <a href="{% url 'login' %}" class="login-link">Já tem uma conta? Entre</a>
+        </div>
+    </div>
+</body>
+</html>

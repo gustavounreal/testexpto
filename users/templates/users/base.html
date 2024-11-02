@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Dashboard{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bars.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cadastroClientes.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap">
+</head>
+<body>
+    <!-- Navbar (visível em dispositivos móveis) -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i><span>Relatórios</span></a></li>
+            <li><a href="{% url 'vendas' %}" class="{% if request.resolver_match.url_name == 'minhas_vendas' %}active{% endif %}"><i class="fas fa-chart-line"></i>Minhas Vendas</a></li>
+            <li><a href="{% url 'cadastro_vendas' %}" class="{% if request.resolver_match.url_name == 'cadastro_vendas' %}active{% endif %}"><i class="fas fa-user-plus"></i><span>Cad Vendas</span></a></li>
+            <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><i class="fas fa-user-circle"></i><span>Perfil</span></a></li>
+            <!-- Adicione mais itens conforme necessário -->
+        </ul>
+    </nav>
+
+    <!-- Sidebar (escondida em dispositivos móveis) -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}"><i class="fas fa-tachometer-alt"></i>Relatórios</a></li>
+            <li><a href="{% url 'vendas' %}" class="{% if request.resolver_match.url_name == 'minhas_vendas' %}active{% endif %}"><i class="fas fa-chart-line"></i>Minhas Vendas</a></li>
+            <li><a href="{% url 'cadastro_vendas' %}" class="{% if request.resolver_match.url_name == 'cadastro_vendas' %}active{% endif %}"><i class="fas fa-user-plus"></i> Cadastro de Vendas</a></li>
+            <li><a href="{% url 'home' %}" class="{% if request.resolver_match.url_name == 'home' %}active{% endif %}"><i class="fas fa-user-circle"></i> Perfil</a></li>
+            <!-- Adicione mais itens conforme necessário -->
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="top-bar">
+            <img src="{% static 'imagens/LogoMR_BARUCH.png' %}" alt="Logo" class="logo">
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <script>
+        // JavaScript para alternar a visibilidade da sidebar
+        document.addEventListener('DOMContentLoaded', function() {
+            const navbar = document.querySelector('.navbar');
+            const sidebar = document.querySelector('.sidebar');
+            const topBar = document.querySelector('.top-bar');
+
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    topBar.classList.add('hidden');
+                } else {
+                    topBar.classList.remove('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
