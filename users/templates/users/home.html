@@ -2,16 +2,20 @@
 {% load static %}
 {% block title %}Perfil do Usuário{% endblock %}
 
-
 {% block content %}
+<!-- Link do CSS externo -->
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+
 <div class="container">
-    <div class="main-container"><p><br></p>
+    <div class="main-container">
+        <p><br></p>
         {% if dados_usuario.nome_completo %}
             <h2 class="welcome-message">Bem-vindo(a) ao seu Perfil, {{ dados_usuario.nome_completo }}</h2>
         {% else %}
             <h2 class="welcome-message">Bem-vindo(a) ao seu Perfil, {{ user.username }}</h2>
-        {% endif %}<p><br></p>
+        {% endif %}
+        <p><br></p>
+        
         <div class="dashboard-container">
             <!-- Container 1: Dados do Perfil (Visualização) -->
             <div id="view-container" class="card">
@@ -58,97 +62,113 @@
                 <h3>Notificações</h3>
                 <div class="user-info">
                     <p><i class="fas fa-bell"></i> <span class="semi-strong">Notificação 1:</span> <span class="data-value">Mensagem de exemplo</span></p>
-                    <p><i class="fas fa-bell"></i> <span class="semi-strong">Notificação 2:</span> <span class="data-value">Mensagem de exemplo</span>
+                    <p><i class="fas fa-bell"></i> <span class="semi-strong">Notificação 2:</span> <span class="data-value">Mensagem de exemplo</span></p>
                 </div>
             </div>
-        </p><p><br></p><p><br></p><p><br></p><p><br></p>
         </div>
 
         <!-- Formulário para atualizar os dados do usuário (Edição) -->
         <div id="edit-container" class="card" style="display: none;">
-            <h3>Dados do Perfil</h3>
+            <h3>Atualizar Dados do Perfil</h3>
             <form method="post" action="{% url 'home' %}">
                 {% csrf_token %}
                 <div class="user-info">
-                    <p><i class="fas fa-id-badge"></i> <span class="semi-strong">ID:</span></p>
+                    <label for="id-input">ID:</label>
                     <input type="text" id="id-input" name="id" value="{{ user.id }}" readonly>
-                    
-                    <p><i class="fas fa-user"></i> <span class="semi-strong">Nome Completo:</span></p>
-                    <input type="text" id="nome-completo-input" name="nome_completo" value="{{ dados_usuario.nome_completo }}">
-                    
-                    <p><i class="fas fa-id-card"></i> <span class="semi-strong">CPF:</span></p>
-                    <input type="text" id="cpf-input" name="cpf" value="{{ dados_usuario.cpf }}" maxlength="14">
-                    
-                    <p><i class="fas fa-map-marker-alt"></i> <span class="semi-strong">Endereço:</span></p>
-                    <input type="text" id="endereco-input" name="endereco" value="{{ dados_usuario.endereco }}">
-                    
-                    <p><i class="fas fa-map-pin"></i> <span class="semi-strong">CEP:</span></p>
-                    <input type="text" id="cep-input" name="cep" value="{{ dados_usuario.cep }}" maxlength="9">
-                    
-                    <p><i class="fas fa-envelope"></i> <span class="semi-strong">Email:</span></p>
-                    <input type="text" id="email-input" name="email" value="{{ dados_usuario.email }}">
-                    
-                    <p><i class="fas fa-phone"></i> <span class="semi-strong">WhatsApp:</span></p>
-                    <input type="text" id="whatsapp-input" name="whatsapp" value="{{ dados_usuario.whatsapp }}" maxlength="15">
                 </div>
-                <div class="button-container">
-                    <button type="submit" class="btn-primary">Salvar</button>
+                <div class="user-info">
+                    <label for="nome-completo-input">Nome Completo:</label>
+                    <input type="text" id="nome-completo-input" name="nome_completo" value="{{ dados_usuario.nome_completo }}">
+                </div>
+                <div class="user-info">
+                    <label for="cpf-input">CPF:</label>
+                    <input type="text" id="cpf-input" name="cpf" value="{{ dados_usuario.cpf }}" maxlength="14">
+                </div>
+                <div class="user-info">
+                    <label for="endereco-input">Endereço:</label>
+                    <input type="text" id="endereco-input" name="endereco" value="{{ dados_usuario.endereco }}">
+                </div>
+                <div class="user-info">
+                    <label for="cep-input">CEP:</label>
+                    <input type="text" id="cep-input" name="cep" value="{{ dados_usuario.cep }}" maxlength="9">
+                </div>
+                <div class="user-info">
+                    <label for="email-input">Email:</label>
+                    <input type="text" id="email-input" name="email" value="{{ dados_usuario.email }}">
+                </div>
+                <div class="user-info">
+                    <label for="whatsapp-input">WhatsApp:</label>
+                    <input type="text" id="whatsapp-input" name="whatsapp" value="{{ dados_usuario.whatsapp }}" maxlength="15">
                 </div>
 
                 <h3>Dados Bancários</h3>
                 <div class="user-info">
-                    <p><i class="fas fa-university"></i> <span class="semi-strong">Banco:</span></p>
+                    <label for="banco-input">Banco:</label>
                     <input type="text" id="banco-input" name="banco" value="{{ dados_usuario.banco }}">
-                    
-                    <p><i class="fas fa-building"></i> <span class="semi-strong">Agência:</span></p>
+                </div>
+                <div class="user-info">
+                    <label for="agencia-input">Agência:</label>
                     <input type="text" id="agencia-input" name="agencia" value="{{ dados_usuario.agencia }}">
-                    
-                    <p><i class="fas fa-credit-card"></i> <span class="semi-strong">Conta:</p>
+                </div>
+                <div class="user-info">
+                    <label for="conta-input">Conta:</label>
                     <input type="text" id="conta-input" name="conta" value="{{ dados_usuario.conta }}">
-                    
-                    <p><i class="fas fa-key"></i> <span class="semi-strong">Pix:</span></p>
+                </div>
+                <div class="user-info">
+                    <label for="pix-input">Pix:</label>
                     <input type="text" id="pix-input" name="pix" value="{{ dados_usuario.pix }}">
                 </div>
                 <div class="button-container">
                     <button type="submit" class="btn-primary">Salvar</button>
+                    <button type="button" class="btn-primary" onclick="hideEditContainer()">Cancelar</button>
                 </div>
             </form>
         </div>
-    </div>
+    </div><p><br></p>
 </div>
 
 <script>
-    function showEditContainer() {
-        document.getElementById('view-container').style.display = 'none';
-        document.getElementById('view-container-bancarios').style.display = 'none';
-        document.getElementById('view-container-atividades').style.display = 'none';
-        document.getElementById('view-container-notificacoes').style.display = 'none';
-        document.getElementById('edit-container').style.display = 'block';
-    }
+// Função para exibir o formulário de edição
+function showEditContainer() {
+    document.getElementById("view-container").style.display = "none";
+    document.getElementById("view-container-bancarios").style.display = "none";
+    document.getElementById("view-container-atividades").style.display = "none";
+    document.getElementById("view-container-notificacoes").style.display = "none";
+    document.getElementById("edit-container").style.display = "block";
+}
 
-    document.getElementById('cpf-input').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        e.target.value = value;
-    });
+// Função para ocultar o formulário de edição
+function hideEditContainer() {
+    document.getElementById("view-container").style.display = "block";
+    document.getElementById("view-container-bancarios").style.display = "block";
+    document.getElementById("view-container-atividades").style.display = "block";
+    document.getElementById("view-container-notificacoes").style.display = "block";
+    document.getElementById("edit-container").style.display = "none";
+}
 
-    document.getElementById('cep-input').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        value = value.replace(/(\d{5})(\d)/, '$1-$2');
-        e.target.value = value;
-    });
+// Formatação de CPF
+document.getElementById("cpf-input").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d)/, "$1.$2");
+    value = value.replace(/(\d{3})(\d{1,2})$/, "$1-$2");
+    e.target.value = value;
+});
 
-    document.getElementById('email-input').addEventListener('input', function (e) {
-        e.target.value = e.target.value.toLowerCase();
-    });
+// Formatação de CEP
+document.getElementById("cep-input").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.replace(/(\d{5})(\d)/, "$1-$2");
+    e.target.value = value;
+});
 
-    document.getElementById('whatsapp-input').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        value = value.replace(/(\d{2})(\d)/, '($1) $2');
-        value = value.replace(/(\d{4,5})(\d{4})$/, '$1-$2');
-        e.target.value = value;
-    });
+// Formatação de WhatsApp
+document.getElementById("whatsapp-input").addEventListener("input", function (e) {
+    let value = e.target.value.replace(/\D/g, "");
+    value = value.replace(/(\d{2})(\d)/, "($1) $2");
+    value = value.replace(/(\d{5})(\d)/, "$1-$2");
+    e.target.value = value;
+});
 </script>
+
 {% endblock %}

@@ -22,12 +22,14 @@ def home(request):
     if request.method == 'POST':
         form = DadosUsuarioForm(request.POST, instance=dados_usuario)
         if form.is_valid():
-            form.save()
+            dados_usuario = form.save(commit=False)
+            dados_usuario.user = request.user  # Ensure the user field is set
+            dados_usuario.save()
             return redirect('home')
     else:
         form = DadosUsuarioForm(instance=dados_usuario)
 
-    saldo_atual = 1000.00  # Exemplo de saldo atual, você deve obter isso do seu banco de dados ou lógica de negócios
+    saldo_atual = 1000.00  # Example current balance, you should get this from your database or business logic
 
     context = {
         'form': form,
