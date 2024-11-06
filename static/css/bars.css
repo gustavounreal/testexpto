@@ -101,6 +101,11 @@
     background-image: url("{% static 'imagens/LogoMR_BARUCH.png' %}");
     background-repeat: no-repeat;
     background-position: center;
+    transition: transform 0.3s ease; /* Adiciona transição para o efeito de esconder/mostrar */
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%); /* Move a sidebar para fora da tela */
 }
 
 .sidebar ul {
@@ -137,6 +142,31 @@
 .sidebar ul li a.active {
     background-color: #ef4c26;
     border-radius: 5px;
+}
+
+/* Botão de alternância da sidebar */
+.sidebar-toggle {
+    position: fixed;
+    top: 50%; /* Centraliza verticalmente */
+    left: 160px; /* Alinha o botão com a borda da sidebar */
+    transform: translateY(-50%); /* Ajusta a posição para centralizar */
+    background-color: #1732d3;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 0 5px 5px 0; /* Bordas arredondadas à direita */
+    cursor: pointer;
+    z-index: 1100; /* Garante que o botão fique acima da sidebar */
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-toggle.toggled {
+    left: 0; /* Move o botão para a borda esquerda quando a sidebar estiver escondida */
+    border-radius: 5px 0 0 5px; /* Bordas arredondadas à esquerda */
+}
+
+.sidebar-toggle:hover {
+    background-color: #ef4c26;
 }
 
 /* Responsividade */

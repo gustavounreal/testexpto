@@ -33,6 +33,11 @@
         </ul>
     </nav>
 
+    <!-- Botão de alternância da sidebar -->
+    <button class="sidebar-toggle" onclick="toggleSidebar()">
+        <i class="fas fa-chevron-left"></i>
+    </button>
+
     <!-- Main Content -->
     <div class="main-content">
         <div class="top-bar">
@@ -43,9 +48,21 @@
 
     <script>
         // JavaScript para alternar a visibilidade da sidebar
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.querySelector('.navbar');
+        function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.querySelector('.sidebar-toggle');
+            sidebar.classList.toggle('hidden');
+            toggleButton.classList.toggle('toggled');
+
+            // Alterna o ícone da seta
+            if (sidebar.classList.contains('hidden')) {
+                toggleButton.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            } else {
+                toggleButton.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
             const topBar = document.querySelector('.top-bar');
 
             window.addEventListener('scroll', function() {
